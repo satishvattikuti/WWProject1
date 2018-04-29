@@ -12,15 +12,6 @@ let type;
 let icon;
 let temp;
 
-//Twitter api secret
-
-const Twitter = new Twit( {
-  consumer_key: 'izFLOhFIKv8ufBKO9lqksgagM',
-  consumer_secret: 'Q6MxE8Hnwroz4fx3hQbBwfASmh1dfVWR11sGPmXb8MtILAFqQl',
-  access_token: '3688784633-eaiMlPQTgCmaNLJHV08kyd8FLyPNeKft3Ezd8rG',
-  access_token_secret: 'GNXPBWjnTJ3ooHd2yUA9fMj8uRJN7mQjTPzFeCuVWhQri'
-});
-
 //connect to database 
 mongoose.connect('mongodb://localhost/tickets');
 

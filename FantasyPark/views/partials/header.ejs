@@ -12,38 +12,37 @@
         <link rel="stylesheet" href="/css/footer.css">
     </head>
     <body>
-   <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-     <div class="navbar-header">
-       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-         data-target="#bs-nav-demo" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+            data-target="#bs-nav-demo" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
           </button>
-      <a class="navbar-brand" href="/"><img src="https://res.cloudinary.com/simplotel/image/upload/x_105,y_178,w_2631,h_900,r_0,c_crop,q_90/w_355,h_200,f_auto,c_fit/wonderla-amusement-parks-resort/Logo_wonderla_amusement_Park_and_Resorts_cife0h" 
-      width="150px" height="40px" style="margin-top:-15px"></a>
-     </div>
-      <div class="collapse navbar-collapse" id="bs-nav-demo">
-      <ul class="nav navbar-nav navbar-left">
-       <li> <a href="/">&nbsp;<%= name %>&deg;F <img src="<%=name3%>" height="20px">  </a></li>
-       <li> <a href="/"> HOME </a></li>
-       <li> <a href="/tickets"> TICKETS </a></li>
-       <li> <a href="/attractions"> RIDES & SLIDES </a></li>
-       
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <% if(!currentUser){ %>
-       <li> <a href="/register">REGISTER</a></li>
-       <li> <a href="/login"> LOGIN </a></li>
-       <% } else{ %>
-       
-       <li> <a href="/">Hi <%= currentUser.username %></a></li>
-       <li> <a href="/logout">LOGOUT </a></li>
-       <li> <a href="/new"> PRICE CHANGE </a></li>
-       <% } %>
-      </ul>
+          <a class="navbar-brand" href="/"><img src="https://res.cloudinary.com/simplotel/image/upload/x_105,y_178,w_2631,h_900,r_0,c_crop,q_90/w_355,h_200,f_auto,c_fit/wonderla-amusement-parks-resort/Logo_wonderla_amusement_Park_and_Resorts_cife0h" 
+          width="150px" height="40px" style="margin-top:-15px"></a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-nav-demo">
+          <ul class="nav navbar-nav navbar-left">
+            <li> <a href="/">&nbsp;<%= name %>&deg;F <img src="<%=name3%>" height="20px">  </a></li>
+            <li> <a href="/"> HOME </a></li>
+            <li> <a href="/tickets"> TICKETS </a></li>
+            <li> <a href="/attractions"> RIDES & SLIDES </a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <% if(!currentUser){ %>
+            <li> <a href="/register">REGISTER</a></li>
+            <li> <a href="/login"> LOGIN </a></li>
+            <% } else{ %>
+            
+            <li> <a href="/">Hi <%= currentUser.username %></a></li>
+            <li> <a href="/logout">LOGOUT </a></li>
+            <li> <a href="/new"> PRICE CHANGE </a></li>
+            <% } %>
+          </ul>
+        </div>
       </div>
-    </div>
-  </nav>
+    </nav>

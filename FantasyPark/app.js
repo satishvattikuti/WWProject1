@@ -8,8 +8,11 @@ const rp = require("request-promise");
 const passport=require("passport");
 const LocalStrategy=require("passport-local");
 const passportLocalMongoose=require("passport-local-mongoose");
+let type;
+let icon;
+let temp;
 
-//Twitter
+//Twitter api secret
 
 const Twitter = new Twit( {
   consumer_key: 'izFLOhFIKv8ufBKO9lqksgagM',
@@ -18,12 +21,14 @@ const Twitter = new Twit( {
   access_token_secret: 'GNXPBWjnTJ3ooHd2yUA9fMj8uRJN7mQjTPzFeCuVWhQri'
 });
 
-
+//connect to database 
 mongoose.connect('mongodb://localhost/tickets');
 
 const app = express();
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname,'/public')));
+//Templating engine 
+app.set("view engine", "ejs");
 
 
 //Schema for collection and database setup
@@ -49,52 +54,31 @@ const attractionSchema = new mongoose.Schema({
 
 const Attraction = mongoose.model("Attraction", attractionSchema);
 
+// Users Schema 
+
 const UserSchema= new mongoose.Schema({
     username: String,
     password: String
 });
-UserSchema.plugin(passportLocalMongoose);
 
+UserSchema.plugin(passportLocalMongoose);
 const User=mongoose.model("User",UserSchema);
 
+// Express-session middleware 
 app.use(require("express-session")({
     secret:"Once again Rusty wis cutest dog!",
     resave:false,
     saveUninitialized: false
 }));
 
+// Authentication using passport.js
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-
-
-// Attraction.create({
-//     name:"Thunder Bolt",
-//     intensity:"Medium",
-//     height:47,
-//     image:"https://images.unsplash.com/photo-1471893110745-5c1b1f2dff57?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=0c7a9fb5de705b9a09ecd49f5d8ba6fb&auto=format&fit=crop&w=1950&q=80",
-//     video:"https://ak5.picdn.net/shutterstock/videos/13726625/preview/stock-footage-riding-a-crazy-roller-coaster-at-the-front-seat-point-of-view-footage.mp4"
-// },(err,saved) => {
-//     if(err) {
-//         console.log(err);
-//     } else {
-//         console.log("Success");
-//     }
-// })
-
-//  Attraction.findByIdAndRemove("5ada35612fb2bc143bae02a7",(err) => {
-//         if(err) {
-//             console.log(err)
-//         } else {
-//             console.log("success");
-//         }
-//     })
-let type;
-let icon;
-let temp;
+// Server's middleware 
 app.use(function(req,res,next){
     request('http://api.apixu.com/v1/current.json?key=c03b1605464b469f936161313180904&q=toledo', (error, response, body) => {
         temp = (JSON.parse(body).current.temp_f);
@@ -109,10 +93,8 @@ app.use(function(req,res,next){
     next();
  });
 
-app.set("view engine", "ejs");
-
-
-
+// Server's routes start here 
+// home route
 app.get('/', (req, res) => {
     res.render('home');
 });
@@ -142,28 +124,24 @@ app.post("/register",(req,res)=>{
 app.get("/invalidlogin",(req,res)=>{
     res.send("invalidlogin");
 });
-//login
-app.get("/login",(req, res)=> {
-    
-    res.render("login");
 
+// login route 
+app.get("/login",(req, res)=> {  
+    res.render("login");
 });
 
-app.post("/login",passport.authenticate("local",{
-    
+app.post("/login",passport.authenticate("local",{ 
     successRedirect:"/",
     failureRedirect:"/invalid login",
-}),function(req,res){
-    
-    
-}
-);
+}));
+
 //logout
 app.get("/logout",(req,res)=>{
     req.logout();
     res.redirect("/");
 });
 
+// tickets page 
 app.get('/tickets', (req, res) => {
     
      Ticket.find({},(err, tickets) => {
@@ -177,6 +155,7 @@ app.get('/tickets', (req, res) => {
     });
 })
 
+// attractions page 
 app.get('/attractions', (req, res) => {
     Attraction.find({}, (err,attractions) => {
        if(err) {
@@ -197,20 +176,13 @@ app.get('/attractions/:id', (req, res) => {
     });
 })
 
-// app.get('/forecast',(req, res) => {
-//   rp('https://api.apixu.com/v1/forecast.json?key=c03b1605464b469f936161313180904&q=Paris')
-//   .then((result) => {
-//       console.log(JSON.parse(result));
-//   })
-//   .catch((err) => {
-//       console.log(err);
-//   })
-// });
 
 app.get('/new', (req, res) => {
     res.render("new");
 });
-app.listen(3000,(err) => {
+
+
+app.listen(process.env.PORT || 3000,(err) => {
     if(err) {
         throw err;
     } else {

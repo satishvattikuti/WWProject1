@@ -1,0 +1,17 @@
+<% include partials/header %>
+
+<br><br><br><br>
+<div class="container detailed-rides">
+    <div class="row">
+        <div class="col-lg-12">
+           <h1><span> <%=ride.name%></span></h1>
+             <video width="70%" controls loop autoplay>
+                <source src="<%=ride.video%>" type="video/mp4">
+                        Your browser does not support the video tag.
+             </video>
+        </div>
+    </div>
+</div>
+
+
+<% include partials/footer %>

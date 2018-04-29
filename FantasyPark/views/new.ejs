@@ -1,0 +1,23 @@
+<% include partials/header %>
+<div class='container'>
+<div class="row">
+  <h1 style="text-align:center;"> Enter UserName and Password to Create an Account</h1>
+   <div style="width:50%; margin:40px auto;">
+           <form action="/" method ="POST">
+               <div class="form-group">
+                   TICKET NAME
+                <input class="form-control" type="text"  name="name" placeholder="ticketname">
+               </div>
+                   PRICE
+               <div class="form-group">
+                <input class="form-control" type="number" name="price" placeholder="price">
+               </div>
+
+               <div class="form-group">
+                   <input class="btn btn-lg btn-primary btn-block" type="submit" value="Change Price">
+               </div>
+           </form>
+        </div>
+    </div>
+</div>
+<% include partials/footer %>

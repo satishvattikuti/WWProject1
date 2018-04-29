@@ -1,0 +1,19 @@
+<% include partials/header %>
+<div class="container attractions">
+    <div class="row">
+        <% rides.forEach((ride) => { %>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="thumbnail rides">
+                <img src="<%=ride.image%>">
+                <div class="caption-rides">
+                    <h2><span> <%=ride.name%></span></h2>
+                    <h3>Minimun height required:<strong><%=ride.height%>  </strong>inches</h3>
+                    <h3>Intensity: <strong><%=ride.intensity%></strong></h3>
+                    <a href="/attractions/<%= ride._id%>" class="btn  btn-lg black-background white"> More Info</a>
+                </div>
+            </div>
+        </div>
+        <% })%>
+    </div>
+</div>
+<% include partials/footer %>

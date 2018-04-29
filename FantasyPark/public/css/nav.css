@@ -1,0 +1,23 @@
+.navbar-default {
+  background-color:#3d2561;
+  border-radius: 2px;
+  border:2px solid #3d3561;
+  background-image: none;
+  background-repeat: no-repeat;
+  opacity:1.0;
+ }
+ 
+.navbar-default .navbar-nav>li>a {
+    
+ color: white;
+ font-family: 'Droid Sans', Helvetica, Arial, sans-serif;
+ font-size: 14px;
+ line-height: 25px;
+ font-weight: bold;
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    background-color: #3d2561;
+    color: yellow;
+}
+
